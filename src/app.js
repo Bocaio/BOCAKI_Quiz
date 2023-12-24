@@ -527,14 +527,13 @@ const bodyPage = document.querySelector('#bodyPage');
 const copyright = document.querySelector('#copyright');
 const divForMainpage = document.querySelector('#divForMainpage');
 const nextBTN = document.querySelector('#nextBTN');
-const scoreBTN = document.querySelector('#scoreBTN');
 
 const initalizingMainPage = () => {
 quizIndex = 0;
 quizNumber = 1;
 correctAnswer = 0;
 Array.from(divForMainpage.children).forEach((el,index)=> {
-    if(el.innerText == 'Home' || el.innerText == 'Next'){
+    if(el.innerText == 'Next'){
         // el.remove();
         console.log('fuck');
     }
@@ -549,7 +548,6 @@ Array.from(divForMainpage.children).forEach((el,index)=> {
         createdLevel.id = `buttonForLevel${el}`;
         createdLevel.innerText = `Level ${el}`;
         nextBTN.classList.add('hidden');
-        scoreBTN.classList.add('hidden');
         divForMainpage.insertBefore(createdLevel,nextBTN)
 
         createdLevel.addEventListener('click',(e) => {
@@ -605,8 +603,7 @@ Array.from(divForMainpage.children).forEach((el,index)=> {
 
 }
 
-const mainFun = (arr,grade) => {
-    const level = grade;
+const mainFun = (arr) => {
     const createdDivForQuiz = document.createElement('div');
     createdDivForQuiz.className = ' w-2/3 rounded-md';
     const currentQuiz = arr[quizIndex];
@@ -684,9 +681,7 @@ const checkAnswer =(event) => {
 
 const start = () => {
     initalizingMainPage();
-    // goToHomeBTN()
-    goToHomeBTN()
-
+    
 }
 
 
@@ -697,7 +692,7 @@ const start = () => {
 const scoreFun = (arr) => {
     nextBTN.classList.add('hidden')
     Array.from(divForMainpage.children).forEach((el,index)=> {
-        if(el.innerText == 'Home' || el.innerText == 'Next'){
+        if(el.innerText == 'Next'){
             // el.remove();
             console.log('fuck');
         }
@@ -705,18 +700,17 @@ const scoreFun = (arr) => {
             el.remove();
         }
     })
-    scoreBTN.classList.remove('hidden');
-    scoreBTN.classList.add('block');
+    
     const createdDivForScore = document.createElement('div');
     createdDivForScore.className = 'border-2 border-black px-4 py-4 pt-2 w-2/3 rounded-md';
     const statement = document.createElement('h1');
     statement.className = 'text-2xl';
     statement.innerText = `Your Score is ${correctAnswer}/${arr.length}`;
     createdDivForScore.appendChild(statement)
-    divForMainpage.insertBefore(createdDivForScore,scoreBTN)
+    divForMainpage.insertBefore(createdDivForScore,nextBTN)
     const tryAgain = document.createElement('button');
-    tryAgain.className = 'text-white mx-auto w-1/4 bg-gray-800 hover:bg-gray-900 rounded-full text-sm h-7';
-    tryAgain.innerText = `Try Again`;
+    tryAgain.className = 'text-white mx-auto w-1/4 bg-gray-800 mt-3 hover:bg-gray-900 rounded-full text-sm h-7';
+    tryAgain.innerText = `Home`;
     createdDivForScore.appendChild(tryAgain)
     tryAgain.addEventListener('click',() => {
         initalizingMainPage();
@@ -800,21 +794,6 @@ const   questionNextBTN = (arr) => {
     // });
 
 
-const goToHomeBTN = () => {
-    
-    scoreBTN.classList.add('hover:scale-150')
-    scoreBTN.addEventListener('click',() => {
-    console.log('hello');
-    correctAnswer = 0;
-    quizIndex = 0;
-    quizNumber = 1;
-    
-    divForMainpage.classList.remove('flex','justify-around','flex-col','items-center','w-3/5','border-2','border-black','pt-6','py-5')
-    divForMainpage.classList.add('grid','h-1/4','px-4')
-    initalizingMainPage()
-    })
-    return 'fuck off'
-}
 
 
 start();
