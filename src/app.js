@@ -727,11 +727,11 @@ const scoreFun = (arr) => {
 
 const   questionNextBTN = (arr) => {
     nextBTN.addEventListener('click',()=>{
-        ++quizIndex;
-            ++quizNumber;
+        
         console.log('i am moe yan');
         if(quizIndex < arr.length){
-            
+            ++quizIndex;
+            ++quizNumber;
             mainFun(arr)
         }
         else{
