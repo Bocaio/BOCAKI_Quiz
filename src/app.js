@@ -529,9 +529,7 @@ const divForMainpage = document.querySelector('#divForMainpage');
 const nextBTN = document.querySelector('#nextBTN');
 
 const initalizingMainPage = () => {
-quizIndex = 0;
-quizNumber = 1;
-correctAnswer = 0;
+
 Array.from(divForMainpage.children).forEach((el,index)=> {
     if(el.innerText == 'Next'){
         // el.remove();
@@ -638,11 +636,10 @@ const mainFun = (arr) => {
             el.remove();
         }
     })
+    console.log(quizIndex);
     // divForMainpage.insertBefore(createdDivForQuiz,nextBTN);
     divForMainpage.insertBefore(createdDivForQuiz,nextBTN)
-    ++quizIndex;
-    ++quizNumber;
-
+    
 
 
 }
@@ -691,6 +688,7 @@ const start = () => {
 
 const scoreFun = (arr) => {
     nextBTN.classList.add('hidden')
+    console.log(quizIndex);
     Array.from(divForMainpage.children).forEach((el,index)=> {
         if(el.innerText == 'Next'){
             // el.remove();
@@ -713,12 +711,14 @@ const scoreFun = (arr) => {
     tryAgain.innerText = `Home`;
     createdDivForScore.appendChild(tryAgain)
     tryAgain.addEventListener('click',() => {
-        initalizingMainPage();
         quizIndex = 0;
-        correctAnswer = 0;
         quizNumber = 1;
+        correctAnswer = 0;
+        initalizingMainPage();
+        
         divForMainpage.classList.remove('flex','justify-around','flex-col','items-center','w-3/5','border-2','border-black','pt-6','py-5')
     divForMainpage.classList.add('grid','h-1/4','px-4')
+    
     })
 }
 
@@ -727,10 +727,14 @@ const scoreFun = (arr) => {
 
 const   questionNextBTN = (arr) => {
     nextBTN.addEventListener('click',()=>{
+        ++quizIndex;
+            ++quizNumber;
         console.log('i am moe yan');
         if(quizIndex < arr.length){
-                    mainFun(arr)}
-                    else{
+            
+            mainFun(arr)
+        }
+        else{
                         scoreFun(arr)
                 }
     })
